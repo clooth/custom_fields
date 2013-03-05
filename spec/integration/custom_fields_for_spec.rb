@@ -57,7 +57,7 @@ describe 'CustomFieldsFor' do
     end
 
     it 'destroys a field' do
-      @blog.posts_custom_fields.delete_all(:conditions => { :name => 'main_author' })
+      @blog.posts_custom_fields.where(:name => 'main_author').delete_all
       @blog.save & @blog.reload
       post = @blog.posts.first
       post.respond_to?(:location).should be_true
