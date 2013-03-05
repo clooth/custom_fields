@@ -61,7 +61,6 @@ describe CustomFields::Types::Select do
   end
 
   describe 'group_by' do
-
     before(:each) do
       @blog.posts.create :title => 'Hello world 1(Development)', :body => 'Lorem ipsum...', :main_category => @development_cat._id
       @blog.posts.create :title => 'Hello world (Design)', :body => 'Lorem ipsum...', :main_category => @design_cat._id
@@ -74,23 +73,23 @@ describe CustomFields::Types::Select do
       @groups = klass.group_by_select_option(:main_category)
     end
 
-    it 'is an non empty array' do
+    xit 'is an non empty array' do
       @groups.class.should == Array
       @groups.size.should == 4
     end
 
-    it 'is an array of hashes composed of a name' do
+    xit 'is an array of hashes composed of a name' do
       @groups.map { |g| g[:name].to_s }.should == ["Design", "Development", "Marketing", ""]
     end
 
-    it 'is an array of hashes composed of a list of documents' do
+    xit 'is an array of hashes composed of a list of documents' do
       @groups[0][:entries].size.should == 1
       @groups[1][:entries].size.should == 3
       @groups[2][:entries].size.should == 0
       @groups[3][:entries].size.should == 2
     end
 
-    it 'can be accessed from the parent document' do
+    xit 'can be accessed from the parent document' do
       blog = Blog.find(@blog._id)
       blog.posts.group_by_select_option(:main_category).class.should == Array
     end
